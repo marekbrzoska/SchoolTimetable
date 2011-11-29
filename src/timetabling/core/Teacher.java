@@ -2,9 +2,10 @@ package timetabling.core;
 
 
 public class Teacher {
-	private int nr;
+	public final int nr;
 	
-	public int getNr(){
-		return this.nr;
+	Teacher(int nr){
+		this.nr = nr;
 	}
+	
 }

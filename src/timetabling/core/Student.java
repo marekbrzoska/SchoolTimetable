@@ -1,5 +1,9 @@
 package timetabling.core;
 
 public class Student {
-	public int nr;
+	public final int nr;
+	
+	Student(int nr){
+		this.nr = nr;
+	}
 }
