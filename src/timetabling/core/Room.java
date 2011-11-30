@@ -1,13 +1,15 @@
 package timetabling.core;
 
+import java.util.Collection;
 import java.util.Set;
 
 import timetabling.core.Feature;
 
 
 public class Room {
-	private int nr;
-	private int size;
+	public final int nr;
+	public final int size;
+	
 	private Set<Feature> features;
 	
 	public Room(int nr, int size, Set<Feature> features){
@@ -16,14 +18,15 @@ public class Room {
 		this.nr = nr;
 	}
 
-	public int getSize(){
-		return this.size;
-	}
-	
-	public int getNr(){
-		return this.nr;
-	}
 	public boolean hasFeature(Feature f){
 		return this.features.contains(f);
+	}
+	
+	public boolean hasFeatures(Collection<Feature> requiredFeatures){
+		return this.features.containsAll(requiredFeatures);
+	}
+	
+	public void addFeature(Feature f){
+		this.features.add(f);
 	}
 }

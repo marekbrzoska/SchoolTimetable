@@ -34,4 +34,7 @@ public class Event {
 		return students;
 	}
 	
+	public void addStudent(Student s){
+		this.students.add(s);
+	}
 }
