@@ -1,17 +1,14 @@
 package timetabling.parsers;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.List;
 
 import timetabling.core.Event;
 import timetabling.core.Room;
 import timetabling.core.Student;
-import timetabling.core.Teacher;
 
 
 /**
@@ -70,11 +67,6 @@ public class ITCParser implements Parser{
 		return null;
 	}
 
-	@Override
-	public List<Teacher> getTeachers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 }

@@ -7,14 +7,12 @@ import timetabling.core.Feature;
 
 public class Event {
 	public final int nr;
-	public final Teacher teacher;
 
 
 	private Set<Feature> requiredFeatures;
 	private Set<Student> students;
 	
-	Event(Teacher teacher, int nr){
-		this.teacher = teacher;
+	Event(int nr){
 		this.nr = nr;
 	}
 
