@@ -3,6 +3,10 @@
  */
 package timetabling.parsers;
 
+import java.io.IOException;
+
+import timetabling.core.Constraints;
+
 
 
 /**
@@ -10,7 +14,5 @@ package timetabling.parsers;
  *
  */
 public interface Parser {
-	public boolean parse();
-	
-	
+	public Constraints parse() throws IOException;	
 }

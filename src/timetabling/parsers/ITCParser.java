@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 
+import timetabling.core.Constraints;
 
 
 /**
@@ -13,6 +13,7 @@ import java.util.List;
  * http://www.idsia.ch/Files/ttcomp2002/oldindex.html
  */
 public class ITCParser implements Parser{
+	
 	BufferedReader input;
 	
 	public ITCParser(String inputFileName){
@@ -24,63 +25,54 @@ public class ITCParser implements Parser{
 		}
 	}
 	
-
 	@Override
-	public boolean parse() {
+	public Constraints parse() throws IOException {
 		String strLine;
 		int nrEvents;
 		int nrRooms;
 		int nrFeatures;
-		int nrStudents;
+		int nrStudents;	
+		
+		int[] roomSizes;
+		int[][] studentsEvents;
+		int[][] roomsFeatures;
+		int[][] eventsFeatures;
 
-
-		try {
-			strLine = input.readLine();
-			String[] firstLine = strLine.split(" ");
-			nrEvents = Integer.parseInt(firstLine[0]);
-			events = new Event[nrEvents];
-			nrRooms = Integer.parseInt(firstLine[1]);
-			rooms = new Room[nrRooms];
-			nrFeatures = Integer.parseInt(firstLine[2]);
-			features = new Feature[nrFeatures];
-			nrStudents = Integer.parseInt(firstLine[3]);
-			students = new Student[nrStudents];
-			
-			for(int i = 0; i < nrRooms; i++){
-				rooms[i] = new Room(Integer.parseInt(input.readLine()));
-			}
-			
-			for(int i = 0; i < nrStudents; i++){
-				rooms[i] = new Room(Integer.parseInt(input.readLine()));
-			}
-			
-			while ((strLine = input.readLine()) != null)   {
-				
-			}
-		} catch (IOException e) {
-			return false;
+		strLine = input.readLine();
+		String[] firstLine = strLine.split(" ");
+		nrEvents = Integer.parseInt(firstLine[0]);
+		nrRooms = Integer.parseInt(firstLine[1]);
+		nrFeatures = Integer.parseInt(firstLine[2]);
+		nrStudents = Integer.parseInt(firstLine[3]);
+		
+		roomSizes = new int[nrRooms];
+		roomsFeatures = new int[nrRooms][nrFeatures];
+		eventsFeatures = new int[nrEvents][nrFeatures];
+		studentsEvents = new int[nrStudents][nrEvents];	
+		
+		for (int i = 0; i < nrRooms; i++) {
+			roomSizes[i] = Integer.parseInt(input.readLine());
 		}
-		return true;
+		
+		for (int i = 0; i < nrStudents; i++) {
+			for (int j = 0; j < nrEvents; j++) {
+				studentsEvents[i][j] = Integer.parseInt(input.readLine());
+			}
+		}
+		
+		for (int i = 0; i < nrRooms; i++) {
+			for (int j = 0; j < nrFeatures; j++) {
+				roomsFeatures[i][j] = Integer.parseInt(input.readLine());
+			}
+		}
+		
+		for (int i = 0; i < nrEvents; i++) {
+			for (int j = 0; j < nrFeatures; j++) {
+				eventsFeatures[i][j] = Integer.parseInt(input.readLine());
+			}
+		}
+			
+		return new Constraints(nrEvents, nrRooms, nrFeatures, nrStudents, roomSizes, studentsEvents, roomsFeatures, eventsFeatures);
 	}
-
-	@Override
-	public List<Event> getEvents() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Room> getRooms() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Student> getStudent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 
 }
