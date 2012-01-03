@@ -1,11 +1,24 @@
+import java.io.IOException;
+
+
+import timetabling.builders.Simple;
+import timetabling.core.Constraints;
+import timetabling.core.Timetable;
+import timetabling.parsers.ITCParser;
+import timetabling.parsers.Parser;
+
 
 public class Test {
+	
+	public static void main(String[] args) throws IOException {
+		
+		Parser parser = new ITCParser("/tmp/test");
+		
+		Constraints constraints = parser.parse();
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.print("Hello 3");
+		Timetable timetable = Simple.build(constraints);
+		
+		timetable.printITCFormatted();
+		
 	}
 }
