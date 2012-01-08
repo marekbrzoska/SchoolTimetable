@@ -171,10 +171,10 @@ for(int e=0;e<noevents;e++)
          	cout <<"Events "<<e<<" and event "<<f<<" both occur in slot "<< eventslots[e]<<" and room "<<eventrooms[e]<<endl;
          	roomclashes++;
          	}
-cout<<endl<<endl<<"Number of unplaced events ="<<unplaced<<endl;
-cout <<"Number of unsuitable rooms = "<<unsuitablerooms<<endl;
-cout <<"Number of student clashes = "<<studentclashes<<endl;
-cout <<"Number of room clashes = "<<roomclashes<<endl<<endl;
+if(unplaced) cout<<endl<<endl<<"Number of unplaced events ="<<unplaced<<endl;
+if(unsuitablerooms) cout <<"Number of unsuitable rooms = "<<unsuitablerooms<<endl;
+if(studentclashes) cout <<"Number of student clashes = "<<studentclashes<<endl;
+if(roomclashes) cout <<"Number of room clashes = "<<roomclashes<<endl<<endl;
 
 long longintensive=0;
 for(int g=0;g<nostudents;g++)
@@ -191,14 +191,14 @@ for(int g=0;g<nostudents;g++)
          else count=0;
          if(count>=3)
          	{
-            cout <<"Student "<<g<<" has a set of three events up to slot "<<slot<<endl;
+            //cout <<"Student "<<g<<" has a set of three events up to slot "<<slot<<endl;
             longintensive++;
             }
          }
       }
    }
 
- cout<<endl<<endl;
+// cout<<endl<<endl;
 long single=0;
 for(int g=0;g<nostudents;g++)
 	{
@@ -217,7 +217,7 @@ for(int g=0;g<nostudents;g++)
          }
       if(count==1)
       	{
-         cout <<"Student "<<g<<" has an event in slot "<<badslot<<" which is the only one on that day"<<endl;
+         //cout <<"Student "<<g<<" has an event in slot "<<badslot<<" which is the only one on that day"<<endl;
             single++;
          }
 
@@ -227,37 +227,37 @@ for(int g=0;g<nostudents;g++)
 	{
     if(studentavailability[8][g]==false)
    	{
-   	cout<<"Student "<<g<<" has an event in slot 8 which is at the end of a day"<<endl;
+   	//cout<<"Student "<<g<<" has an event in slot 8 which is at the end of a day"<<endl;
       endofday++;
       }
     if(studentavailability[17][g]==false)
    	{
-   	cout<<"Student "<<g<<" has an event in slot 17 which is at the end of a day"<<endl;
+   	//cout<<"Student "<<g<<" has an event in slot 17 which is at the end of a day"<<endl;
       endofday++;
       }
     if(studentavailability[26][g]==false)
    	{
-   	cout<<"Student "<<g<<" has an event in slot 26 which is at the end of a day"<<endl;
+   	//cout<<"Student "<<g<<" has an event in slot 26 which is at the end of a day"<<endl;
       endofday++;
       }
     if(studentavailability[35][g]==false)
    	{
-   	cout<<"Student "<<g<<" has an event in slot 35 which is at the end of a day"<<endl;
+   	//cout<<"Student "<<g<<" has an event in slot 35 which is at the end of a day"<<endl;
       endofday++;
       }
     if(studentavailability[44][g]==false)
    	{
-   	cout<<"Student "<<g<<" has an event in slot 44 which is at the end of a day"<<endl;
+   	//cout<<"Student "<<g<<" has an event in slot 44 which is at the end of a day"<<endl;
       endofday++;
       }
     }
-cout <<endl<<"Penalty for students having three or more events in a row = "<<longintensive<<endl;
-cout <<"Penalty for students having single events on a day = "<<single<<endl;
-cout <<"Penalty for students having end of day events = "<<endofday<<endl;
+//cout <<endl<<"Penalty for students having three or more events in a row = "<<longintensive<<endl;
+//cout <<"Penalty for students having single events on a day = "<<single<<endl;
+//cout <<"Penalty for students having end of day events = "<<endofday<<endl;
 
-cout<<endl<<"TOTAL PENALTY = "<<(longintensive+single+endofday)<<endl<<endl;
+//cout<<endl<<"TOTAL PENALTY = "<<(longintensive+single+endofday)<<endl<<endl;
+cout<<longintensive+single+endofday<<endl;
 if (unplaced+unsuitablerooms+studentclashes+roomclashes)cout<<"This solution file does not give a complete and feasible timetable"<<endl;
-else    cout<<"This solution file gives a complete and feasible timetable"<<endl;
 
 
 delete [] roomsizes;
@@ -272,12 +272,5 @@ for(int i=0;i<nofeatures;i++)delete []roomfeatures[i];
 delete []roomfeatures;
 for(int i=0;i<nofeatures;i++)delete []eventfeatures[i];
 delete []eventfeatures;
-cout<<"Press return to continue"<<endl;
-		  char key;
-		  cin.get(key);
-
-
-
-
 
 }
