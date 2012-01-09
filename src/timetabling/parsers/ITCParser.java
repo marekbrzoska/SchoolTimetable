@@ -21,6 +21,7 @@ public class ITCParser implements Parser{
 			input = new BufferedReader(new FileReader(inputFileName)); 
 		} 
 		catch (FileNotFoundException e) {
+			System.out.println("Nie znaleziono pliku: " + inputFileName);
 			input = null;
 		}
 	}

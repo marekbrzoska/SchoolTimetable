@@ -256,9 +256,11 @@ for(int g=0;g<nostudents;g++)
 //cout <<"Penalty for students having end of day events = "<<endofday<<endl;
 
 //cout<<endl<<"TOTAL PENALTY = "<<(longintensive+single+endofday)<<endl<<endl;
-cout<<longintensive+single+endofday<<endl;
-if (unplaced+unsuitablerooms+studentclashes+roomclashes)cout<<"This solution file does not give a complete and feasible timetable"<<endl;
 
+if (unplaced+unsuitablerooms+studentclashes+roomclashes)
+	cout<<"This solution file does not give a complete and feasible timetable"<<endl;
+else
+	cout<<longintensive+single+endofday<<endl;
 
 delete [] roomsizes;
 delete [] eventrooms;
