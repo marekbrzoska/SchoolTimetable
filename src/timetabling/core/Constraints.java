@@ -78,6 +78,20 @@ public class Constraints {
 		return true;
 	}
 	
+	public boolean eventFitsInTimeSlot(int eventNr, int timeSlotNr, Timetable timetable) {
+		for (int room = 0; room < timetable.slots.length; room++) {
+			if (timetable.slots[room][timeSlotNr] == null || eventNr == timetable.slots[room][timeSlotNr]) {
+				continue;
+			}
+			
+			if (haveCommonStudents(eventNr, timetable.slots[room][timeSlotNr])) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 	private static boolean intersectionNonEmpty(Set<Integer> setA, Set<Integer> setB) {
 	    for (Integer x : setA)
 	      if (setB.contains(x))

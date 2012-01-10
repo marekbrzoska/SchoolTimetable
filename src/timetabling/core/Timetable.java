@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 
-public class Timetable {
+public class Timetable implements Cloneable {
 
 	public Integer[][] slots;
 	
