@@ -2,12 +2,15 @@ package timetabling.operators;
 
 import java.util.Random;
 
+import timetabling.core.Constraints;
 import timetabling.core.Timetable;
 
 public class SectorCrossover extends Crossover {
 
 	@Override
-	protected Timetable makeChild(Timetable parent1, Timetable parent2, Random random) {
+	protected Timetable makeChild(Timetable parent1, Timetable parent2, Constraints constraints, double lastSlotInsertionProbability, Random random) {
+		Timetable child = parent1.clone();
+		
 		int room1 = random.nextInt(parent1.slots.length);
 		int room2 = random.nextInt(parent1.slots.length);
 		
@@ -28,7 +31,7 @@ public class SectorCrossover extends Crossover {
 		
 		for (int r = room1; r <= room2; r++) {
 			for (int ts = ts1; ts <= ts2; ts++) {
-				
+				tryPutting(parent1.slots[r][ts], r, ts, child, constraints, lastSlotInsertionProbability, random);
 			}
 		}
 		

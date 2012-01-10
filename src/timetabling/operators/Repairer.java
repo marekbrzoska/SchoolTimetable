@@ -7,9 +7,12 @@ import timetabling.core.Timetable;
 
 public class Repairer {
 	
-	public static boolean run (Timetable timetable, Constraints constraints, int eventNr, int roomNr, double lastSlotInsertionProbability, Random random) {
+	public static boolean run (Timetable timetable, Constraints constraints, int eventNr, int roomNr, int timeSlotNr, double lastSlotInsertionProbability, Random random) {
 		for (int ts: timetable.slots[roomNr]) {
-			if (tryPutting(timetable, constraints, eventNr, roomNr, ts, lastSlotInsertionProbability, random)) {
+			if (
+					ts != timeSlotNr &&
+					tryPutting(timetable, constraints, eventNr, roomNr, ts, lastSlotInsertionProbability, random)
+					) {
 				return true;
 			}
 		}

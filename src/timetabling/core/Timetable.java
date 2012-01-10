@@ -87,4 +87,15 @@ public class Timetable implements Cloneable {
 			System.out.println("Nie udalo sie zapisac do pliku: " + path);
 		}
 	}
+	
+	public Timetable clone() {
+		Timetable newTimetable = new Timetable(slots.length, slots[0].length);
+		for (int r = 0; r < slots.length; r++) {
+			for (int ts = 0; ts < slots[0].length; ts++) {
+				newTimetable.slots[r][ts] = slots[r][ts];
+			}
+		}
+		
+		return newTimetable;
+	}
 }
