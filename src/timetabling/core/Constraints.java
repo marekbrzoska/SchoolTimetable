@@ -99,7 +99,10 @@ public class Constraints {
 	    return false;
 	  }
 	
-	public boolean haveCommonStudents(int e1, int e2) {
+	public boolean haveCommonStudents(Integer e1, Integer e2) {
+		if (e1 == null || e2 == null)
+			return false;
+		
 		return intersectionNonEmpty(eventsStudents[e1], eventsStudents[e2]);
 	}
 }

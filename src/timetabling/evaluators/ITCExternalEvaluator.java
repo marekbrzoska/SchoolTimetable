@@ -37,7 +37,7 @@ public class ITCExternalEvaluator {
 			return Integer.parseInt(result);
 		}
 		catch (NumberFormatException e) {
-			return -1;
+			return -6;
 		}
 	}
 }

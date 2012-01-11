@@ -24,9 +24,12 @@ public abstract class Crossover {
 
 			if ( ! Repairer.run(timetable, constraints, oldEventNr, roomNr, timeSlotNr, lastSlotDenialProbability, random)) {
 				timetable.slots[roomNr][timeSlotNr] = oldEventNr;
+				//System.out.print("!");
+			} else {
+				//System.out.print("*");
 			}
 			
-		} else if (timetable.slots[roomNr][timeSlotNr] == null) {
+		} /*else if (timetable.slots[roomNr][timeSlotNr] == null) {
 			if (
 					constraints.eventFitsInTimeSlot(eventNr, timeSlotNr, timetable) && 
 					constraints.eventFitsInRoom(eventNr, roomNr)
@@ -42,6 +45,8 @@ public abstract class Crossover {
 				}
 			
 				timetable.slots[roomNr][timeSlotNr] = eventNr;
+				
+				//System.out.print("*");
 			}
 		} else {
 			if (
@@ -49,11 +54,12 @@ public abstract class Crossover {
 					constraints.eventFitsInRoom(eventNr, roomNr)
 					) {
 				int x = -1, y = -1;
+				int oldEventNr = timetable.slots[roomNr][timeSlotNr].intValue();
 				
 				outerloop:
 				for (int r = 0; r < timetable.slots.length; r++) {
 					for (int ts = 0; ts < timetable.slots[0].length; ts++) {
-						if (timetable.slots[r][ts] == eventNr) {
+						if (timetable.slots[r][ts] != null && timetable.slots[r][ts].intValue() == eventNr.intValue()) {
 							timetable.slots[r][ts] = null;
 							x = r;
 							y = ts;
@@ -62,15 +68,17 @@ public abstract class Crossover {
 					}
 				}
 			
-				int oldEventNr = timetable.slots[roomNr][timeSlotNr];
 				timetable.slots[roomNr][timeSlotNr] = eventNr;
 				
 				if ( ! Repairer.run(timetable, constraints, oldEventNr, roomNr, timeSlotNr, lastSlotDenialProbability, random)) {
 					timetable.slots[roomNr][timeSlotNr] = oldEventNr;
 					timetable.slots[x][y] = eventNr;
+					//System.out.print("!");
+				} else {
+					//System.out.print("*");
 				}
-			}
-		}
+			} 
+		} */
 	}
 	
 	abstract protected Timetable makeChild(Timetable parent1, Timetable parent2, Constraints constraints, double lastSlotDenialProbability, Random random);

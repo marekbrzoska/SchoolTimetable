@@ -13,10 +13,13 @@ public class Test {
 	public static void main(String[] args) throws IOException {
 		Random random = new Random();
 		
-		Parser parser = new ITCParser("solutions/competition02.tim");
-		int fileNr = 2;
-		Constraints constraints = parser.parse();
+		for (int fileNr = 2; fileNr <= 2; fileNr++) {
+			Parser parser = new ITCParser("solutions/competition0" + Integer.toString(fileNr) + ".tim");
+			Constraints constraints = parser.parse();
 		
-		Timetable best = Evolution.run(100, 20, constraints, fileNr, 0.1, 0.8, 0.8);
+			Timetable best = Evolution.run(30, 40, constraints, fileNr, 0.05, 0.5, 0.03);
+			System.out.println("\n\nWynik końcowy: " + Integer.toString(best.penalty.intValue()));
+			System.out.println("\n\n\n\n***************************************\n\n");
+		}
 	}
 }

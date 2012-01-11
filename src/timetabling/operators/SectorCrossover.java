@@ -31,7 +31,7 @@ public class SectorCrossover extends Crossover {
 		
 		for (int r = room1; r <= room2; r++) {
 			for (int ts = ts1; ts <= ts2; ts++) {
-				tryPutting(parent1.slots[r][ts], r, ts, child, constraints, lastSlotDenialProbability, random);
+				tryPutting(parent2.slots[r][ts], r, ts, child, constraints, lastSlotDenialProbability, random);
 			}
 		}
 		

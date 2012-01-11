@@ -8,7 +8,7 @@ import timetabling.core.Timetable;
 public class Repairer {
 	
 	public static boolean run (Timetable timetable, Constraints constraints, int eventNr, int roomNr, int timeSlotNr, double lastSlotDenialProbability, Random random) {
-		for (int ts: timetable.slots[roomNr]) {
+		for (int ts = 0; ts < timetable.slots[0].length; ts++) {
 			if (
 					ts != timeSlotNr &&
 					tryPutting(timetable, constraints, eventNr, roomNr, ts, lastSlotDenialProbability, random)
@@ -22,7 +22,7 @@ public class Repairer {
 				continue;
 			}
 			
-			for (int ts : timetable.slots[r]) {
+			for (int ts = 0; ts < timetable.slots[0].length; ts++) {
 				if (tryPutting(timetable, constraints, eventNr, r, ts, lastSlotDenialProbability, random)) {
 					return true;
 				}
@@ -43,6 +43,10 @@ public class Repairer {
 		for (int curRoomNr = 0; curRoomNr < constraints.nrRooms; curRoomNr++) {
 			if (curRoomNr != roomNr && constraints.haveCommonStudents(eventNr, timetable.slots[curRoomNr][timeSlotNr]))
 				return false;
+		}
+		
+		if ( ! constraints.eventFitsInRoom(eventNr, roomNr)) {
+			return false;
 		}
 		
 		timetable.slots[roomNr][timeSlotNr] = eventNr;
