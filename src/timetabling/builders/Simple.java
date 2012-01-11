@@ -10,13 +10,16 @@ import timetabling.core.Timetable;
 
 public class Simple {
 	
-	private Simple() {}
+	private int fileNr;
 	
+	public Simple(int fileNr) {
+		this.fileNr = fileNr;
+	}
 	
-	public static Timetable build(Constraints constraints) {
+	public Timetable build(Constraints constraints) {
 		Random random = new Random();
 		Slot slot;
-		Timetable timetable = new Timetable(constraints.nrRooms, constraints.nrTimeSlots);
+		Timetable timetable = new Timetable(constraints.nrRooms, constraints.nrTimeSlots, fileNr);
 		
 		boolean[][] roomsEvents = new boolean[constraints.nrRooms][constraints.nrEvents];
 		

@@ -7,11 +7,11 @@ import timetabling.core.Timetable;
 
 public class Repairer {
 	
-	public static boolean run (Timetable timetable, Constraints constraints, int eventNr, int roomNr, int timeSlotNr, double lastSlotInsertionProbability, Random random) {
+	public static boolean run (Timetable timetable, Constraints constraints, int eventNr, int roomNr, int timeSlotNr, double lastSlotDenialProbability, Random random) {
 		for (int ts: timetable.slots[roomNr]) {
 			if (
 					ts != timeSlotNr &&
-					tryPutting(timetable, constraints, eventNr, roomNr, ts, lastSlotInsertionProbability, random)
+					tryPutting(timetable, constraints, eventNr, roomNr, ts, lastSlotDenialProbability, random)
 					) {
 				return true;
 			}
@@ -23,7 +23,7 @@ public class Repairer {
 			}
 			
 			for (int ts : timetable.slots[r]) {
-				if (tryPutting(timetable, constraints, eventNr, r, ts, lastSlotInsertionProbability, random)) {
+				if (tryPutting(timetable, constraints, eventNr, r, ts, lastSlotDenialProbability, random)) {
 					return true;
 				}
 			}
@@ -32,11 +32,11 @@ public class Repairer {
 		return false;
 	}
 	
-	private static boolean tryPutting(Timetable timetable, Constraints constraints, int eventNr, int roomNr, int timeSlotNr, double lastSlotInsertionProbability, Random random) {
+	private static boolean tryPutting(Timetable timetable, Constraints constraints, int eventNr, int roomNr, int timeSlotNr, double lastSlotDenialProbability, Random random) {
 		if (timetable.slots[roomNr][timeSlotNr] != null) 
 			return false;
 		
-		if (timeSlotNr % 9 == 8 && random.nextDouble() < lastSlotInsertionProbability) {
+		if (timeSlotNr % 9 == 8 && random.nextDouble() < lastSlotDenialProbability) {
 				return false;
 		}
 		

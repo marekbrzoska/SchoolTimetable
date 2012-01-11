@@ -7,7 +7,7 @@ import timetabling.core.Timetable;
 
 public class Mutation {
 	
-	public static void run(Timetable timetable, Constraints constraints, Random random) {
+	public static void apply(Timetable timetable, Constraints constraints, Random random) {
 		for (int i = 0; i < 1000; i++) {
 			int r1 = random.nextInt(constraints.nrRooms);
 			int r2 = random.nextInt(constraints.nrRooms);

@@ -6,13 +6,19 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import timetabling.evaluators.ITCExternalEvaluator;
 
-public class Timetable implements Cloneable {
+
+public class Timetable implements Cloneable, Comparable<Timetable> {
 
 	public Integer[][] slots;
+	private int fileNr;
 	
-	public Timetable(int nrRooms, int nrTimeslots) {
+	public Integer penalty;
+	
+	public Timetable(int nrRooms, int nrTimeslots, int fileNr) {
 		slots = new Integer[nrRooms][nrTimeslots];
+		this.fileNr = fileNr;
 	}
 	
 	public void print() {
@@ -89,13 +95,29 @@ public class Timetable implements Cloneable {
 	}
 	
 	public Timetable clone() {
-		Timetable newTimetable = new Timetable(slots.length, slots[0].length);
+		Timetable newTimetable = new Timetable(slots.length, slots[0].length, fileNr);
 		for (int r = 0; r < slots.length; r++) {
 			for (int ts = 0; ts < slots[0].length; ts++) {
 				newTimetable.slots[r][ts] = slots[r][ts];
 			}
 		}
+		newTimetable.penalty = this.penalty;
 		
 		return newTimetable;
+	}
+	
+	@Override
+	public int compareTo(Timetable that) {
+		if (this.penalty.intValue() > that.penalty.intValue()) {
+			return 1;
+		} else if (this.penalty.intValue() == that.penalty.intValue()) {
+			return 0;
+		} else {
+			return -1;
+		}
+	}
+	
+	public void evaluate() {
+		this.penalty = ITCExternalEvaluator.run(this, fileNr);
 	}
 }

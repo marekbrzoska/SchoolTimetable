@@ -8,21 +8,21 @@ import timetabling.helpers.TwoTimetables;
 
 public abstract class Crossover {
 	
-	public TwoTimetables apply(Timetable parent1, Timetable parent2, Constraints constraints, double lastSlotInsertionProbability, Random random) {
-		Timetable child1 = makeChild(parent1, parent2, constraints, lastSlotInsertionProbability, random);
-		Timetable child2 = makeChild(parent2, parent1, constraints, lastSlotInsertionProbability, random);
+	public TwoTimetables apply(Timetable parent1, Timetable parent2, Constraints constraints, double lastSlotDenialProbability, Random random) {
+		Timetable child1 = makeChild(parent1, parent2, constraints, lastSlotDenialProbability, random);
+		Timetable child2 = makeChild(parent2, parent1, constraints, lastSlotDenialProbability, random);
 
 		return new TwoTimetables(child1, child2);
 	}
 	
-	public void tryPutting(Integer eventNr, int roomNr, int timeSlotNr, Timetable timetable, Constraints constraints, double lastSlotInsertionProbability, Random random) {
+	public void tryPutting(Integer eventNr, int roomNr, int timeSlotNr, Timetable timetable, Constraints constraints, double lastSlotDenialProbability, Random random) {
 		if (eventNr == timetable.slots[roomNr][timeSlotNr]) {
 			return;
 		} else if (eventNr == null) {
 			Integer oldEventNr = timetable.slots[roomNr][timeSlotNr];
 			timetable.slots[roomNr][timeSlotNr] = null;
 
-			if ( ! Repairer.run(timetable, constraints, oldEventNr, roomNr, timeSlotNr, lastSlotInsertionProbability, random)) {
+			if ( ! Repairer.run(timetable, constraints, oldEventNr, roomNr, timeSlotNr, lastSlotDenialProbability, random)) {
 				timetable.slots[roomNr][timeSlotNr] = oldEventNr;
 			}
 			
@@ -65,7 +65,7 @@ public abstract class Crossover {
 				int oldEventNr = timetable.slots[roomNr][timeSlotNr];
 				timetable.slots[roomNr][timeSlotNr] = eventNr;
 				
-				if ( ! Repairer.run(timetable, constraints, oldEventNr, roomNr, timeSlotNr, lastSlotInsertionProbability, random)) {
+				if ( ! Repairer.run(timetable, constraints, oldEventNr, roomNr, timeSlotNr, lastSlotDenialProbability, random)) {
 					timetable.slots[roomNr][timeSlotNr] = oldEventNr;
 					timetable.slots[x][y] = eventNr;
 				}
@@ -73,5 +73,5 @@ public abstract class Crossover {
 		}
 	}
 	
-	abstract protected Timetable makeChild(Timetable parent1, Timetable parent2, Constraints constraints, double lastSlotInsertionProbability, Random random);
+	abstract protected Timetable makeChild(Timetable parent1, Timetable parent2, Constraints constraints, double lastSlotDenialProbability, Random random);
 }
